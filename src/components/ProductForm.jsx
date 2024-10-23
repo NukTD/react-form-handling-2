@@ -1,6 +1,28 @@
+import { useState } from "react";
+
 function ProductForm() {
+  const[formData, setFormData] = useState({
+    name: "",
+    image: "",
+    price: "",
+    description: ""
+   })
+
+   const handleChange = (event) => {
+    const { name, value} = event.target;
+    setFormData({ 
+      ...formData,
+      [name]: value
+    })
+   }
+
+   const handleSubmit = (event) => {
+    event.preventDefault(); 
+    alert(JSON.stringify(formData, null, 2));
+  };
+
   return (
-    <form className="post-form">
+    <form className="post-form" onSubmit={handleSubmit}>
       <h1>Create Product Form</h1>
       <div className="input-container">
         <label>
@@ -10,7 +32,8 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            onChange={() => {}}
+            value={formData.name}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -22,7 +45,8 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            onChange={() => {}}
+            value={formData.image}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -34,7 +58,8 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            onChange={() => {}}
+            value={formData.price}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -46,7 +71,8 @@ function ProductForm() {
             name="description"
             type="text"
             placeholder="Enter description here"
-            onChange={() => {}}
+            value={formData.description}
+            onChange={handleChange}
             rows={4}
             cols={30}
           />
